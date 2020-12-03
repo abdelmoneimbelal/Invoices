@@ -201,27 +201,31 @@
                             <div class="menu-header-content bg-primary text-right">
                                 <div class="d-flex">
                                     <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات</h6>
-                                    <span class="badge badge-pill badge-warning mr-auto my-auto float-left"><a href="\MarkAsRead_all">تعين قراءة الكل</a></span>
+                                    <span class="badge badge-pill badge-warning mr-auto my-auto float-left"><a
+                                                href="\MarkAsRead_all">تعين قراءة الكل</a></span>
                                 </div>
-                                <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 "><h6
-                                        style="color: yellow">{{ auth()->user()->unreadNotifications->count() }}</h6></p>
+                                <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
+                                <h6 style="color: yellow" id="notifications_count">{{ auth()->user()->unreadNotifications->count() }}</h6>
+                                </p>
                             </div>
-                            @foreach(auth()->user()->unreadNotifications as $notification)
+                            <div id="unreadNotifications">
+                                @foreach(auth()->user()->unreadNotifications as $notification)
 
-                                <div class="main-notification-list Notification-scroll">
-                                    <a class="d-flex p-3 border-bottom"
-                                       href="{{ url('invoices-details') }}/{{ $notification->data['id'] }}">
-                                        <div class="notifyimg bg-pink">
-                                            <i class="la la-file-alt text-white"></i>
-                                        </div>
-                                        <div class="mr-3">
-                                            <h5 class="notification-label mb-1">{{ $notification->data['title'] }} {{ $notification->data['user'] }} </h5>
-                                            <div class="notification-subtext">{{ $notification->created_at }}</div>
-                                        </div>
-                                    </a>
-                                </div>
+                                    <div class="main-notification-list Notification-scroll">
+                                        <a class="d-flex p-3 border-bottom"
+                                           href="{{ url('invoices-details') }}/{{ $notification->data['id'] }}">
+                                            <div class="notifyimg bg-pink">
+                                                <i class="la la-file-alt text-white"></i>
+                                            </div>
+                                            <div class="mr-3">
+                                                <h5 class="notification-label mb-1">{{ $notification->data['title'] }} {{ $notification->data['user'] }} </h5>
+                                                <div class="notification-subtext">{{ $notification->created_at }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
 
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 @endcan
@@ -253,8 +257,8 @@
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
                         <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                    class="bx bx-log-out"></i>تسجيل خروج</a>
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="bx bx-log-out"></i>تسجيل خروج</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

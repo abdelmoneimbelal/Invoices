@@ -112,8 +112,8 @@ class InvoicesController extends Controller
 
         //Notification
 
-//       $user = User::get();
-        $user = User::where('roles_name', '["owner"]')->get();
+      $user = User::get();
+//        $user = User::where('roles_name', '["owner"]')->get();
 
         $invoices = invoices::latest()->first();
 
